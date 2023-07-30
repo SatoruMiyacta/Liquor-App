@@ -4,11 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "vite --mode development",
+    "prod": "vite --mode production",
+    "build:prod": "tsc && vite build --mode production",
+    "build:dev": "tsc && vite build --mode development",
     "lint": "eslint src",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "firebase emulators:exec --only firestore 'vitest run'"
   },
   "dependencies": {
     "firebase": "^10.1.0",
@@ -16,6 +18,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@firebase/rules-unit-testing": "^3.0.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.2.0",
