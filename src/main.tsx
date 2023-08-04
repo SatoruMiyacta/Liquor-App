@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import { initializeApp } from "firebase/app";
+import { createRoot } from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -14,9 +16,23 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-console.log(app)
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: 
+          <App />
+  },
+]);
+
+let container: HTMLElement | null = null;
+
+document.addEventListener('DOMContentLoaded', function () {
+    container = document.getElementById('root') as HTMLElement;
+    const root = createRoot(container);
+    root.render(
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>
+    );
+});
